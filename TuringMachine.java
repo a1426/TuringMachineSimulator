@@ -1,4 +1,3 @@
-
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
@@ -6,8 +5,7 @@ import java.util.Map;
 public class TuringMachine {
     //The list of all internal states.
     private List<Integer> stateList;
-    //Takes in a mapping of the object state, and the tape state, seperated by a comma.
-    //The value is "[state,tape,left or right]"(left = -1, right=1).
+    //Takes in a mapping of the object state, and the tape state, seperated by a comma. The format is "[state,tape,left or right]", where left = -1, right=1.
     private Map<String,Integer[]> function;
     //The list of states that cause the machine to halt.
     private List<Integer> haltStates;
@@ -31,11 +29,7 @@ public class TuringMachine {
             state=map[0];
             tape.setElement(map[1],index);
             //Moves index(i.e. the head of the machine), left or right depending on the function.
-            index+=map[3];
+            index+=map[2];
         }
-
-
     }
-
-
 }
