@@ -9,15 +9,12 @@ public class TuringMachine {
     private Map<String,Integer[]> function;
     //The list of states that cause the machine to halt.
     private List<Integer> haltStates;
-    //The blank symbol.
-    private int blank;
     //The tape object.
     private Tape tape;
-    public TuringMachine( List<Integer> sl, HashMap<String,Integer[]> f, List<Integer> hs, int b){
+    public TuringMachine( List<Integer> sl, HashMap<String,Integer[]> f, List<Integer> hs, int blank){
         stateList=sl;
         function=f;
         haltStates=hs;
-        blank=b;
         tape=new Tape(blank);
     }
     public void run(int i){
