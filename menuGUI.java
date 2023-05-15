@@ -1,20 +1,30 @@
 import javax.swing.*;
-import java.awt.BorderLayout;
-public class menuGUI{
-    public static void main(String[] args){
+public class menuGUI extends JFrame{
+    public menuGUI(){
+        super("Turing Machine Simulator");
         JFrame menu = new JFrame();
-        menu.setSize(1000, 300);
+        menu.setSize(300, 300);
         menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        menu.setTitle("Turing Machine Simulator");
-        JButton exitButton = new JButton("Click here to exit.");
-        exitButton.addActionListener(new EndListener());
-        menu.add(exitButton, BorderLayout.EAST);
-        JButton createButton = new JButton("Click here to create a new Turing Machine.");
-        createButton.addActionListener(new EndListener());
-        menu.add(createButton, BorderLayout.WEST);
-        JButton presetButton = new JButton("Click here to use a preset Turing Machine.");
-        presetButton.addActionListener(new EndListener());
-        menu.add(presetButton, BorderLayout.CENTER);
+        JMenu mainMenu=new JMenu("Actions");
+        JMenuItem custom = new JMenuItem("Create a custom Turing Machine");
+        custom.addActionListener(new EndListener());
+        mainMenu.add(custom);
+        JMenu preset = new JMenu("Select a preset Turing Machine");
+        preset.addActionListener(new EndListener());
+        mainMenu.add(preset);
+        JMenuItem exit = new JMenuItem("Quit");
+        exit.addActionListener(new EndListener());
+        mainMenu.add(exit);
+        JLabel welcome = new JLabel("To get started, use the menu in the upper left hand corner.");
+        menu.add(welcome);
+        JMenuBar mBar = new JMenuBar();
+        mBar.add(mainMenu);
+        menu.setJMenuBar(mBar);
         menu.setVisible(true);
+
     }
+    public static void main(String[] args){
+        new menuGUI();
+    }
+
 }
