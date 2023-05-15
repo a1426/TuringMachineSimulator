@@ -7,7 +7,8 @@ public class menuGUI extends JFrame{
         menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JMenu mainMenu=new JMenu("Actions");
         JMenuItem custom = new JMenuItem("Create a custom Turing Machine");
-        custom.addActionListener(new EndListener());
+        CreateListener cl= new CreateListener(menu);
+        custom.addActionListener(cl);
         mainMenu.add(custom);
         JMenu preset = new JMenu("Select a preset Turing Machine");
         preset.addActionListener(new EndListener());
@@ -15,13 +16,12 @@ public class menuGUI extends JFrame{
         JMenuItem exit = new JMenuItem("Quit");
         exit.addActionListener(new EndListener());
         mainMenu.add(exit);
-        JLabel welcome = new JLabel("To get started, use the menu in the upper left hand corner.");
+        JLabel welcome = new JLabel("Start with the menu in the upper left hand corner.");
         menu.add(welcome);
         JMenuBar mBar = new JMenuBar();
         mBar.add(mainMenu);
         menu.setJMenuBar(mBar);
         menu.setVisible(true);
-
     }
     public static void main(String[] args){
         new menuGUI();
