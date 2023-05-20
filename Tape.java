@@ -11,7 +11,7 @@ public class Tape {
     }
 
     public int getElement(int index){
-        //The index will only vary by 1..
+        //The index will only vary by 1.
         if(index>=r_tape.size()){
             r_tape.add(blank);
         }

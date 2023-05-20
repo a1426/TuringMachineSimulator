@@ -13,22 +13,11 @@ public class StateListener implements ActionListener{
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        String text = txt.getText();
-        String[] spl = text.split(",");
-        ArrayList<Integer> states=new ArrayList<>();
-        for(int i =0; i<spl.length; i++){
-            try{
-            int a= Integer.parseInt(spl[i]);
-            states.add(a);
-            }
-            catch (NumberFormatException ex){
-            }
-        }
-        //Moves to the next stage
+        ArrayList<Integer> states=menuGUI.helper(txt);
+        //Moves to the next stage, looking for the initial state
         if(states.size()>0){
-            frame.getContentPane().removeAll();
-            frame.getContentPane().repaint();
-
+            JTextField area = new JTextField();
+            menuGUI.submit(frame,"Enter the initial state of the Turing Machine, from the following: "+states,area, new InitialStateListener(area, frame, states));
         }
 
     }
