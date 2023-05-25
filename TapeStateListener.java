@@ -17,11 +17,11 @@ public class TapeStateListener implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        ArrayList<Integer> tapeStates=menuGUI.helper(txt);
+        ArrayList<Integer>tapeStates =menuGUI.helper(txt);
         //Moves to the next stage, looking for the initial state
         if(states.size()>0){
             JTextField area = new JTextField();
-            menuGUI.submit(frame,"Enter the blank state of the Turing Machine, from the following: "+tapeStates,area, new BlankTapeListener(area, frame, states,iState,tapeStates));
+            menuGUI.submit(frame,"Enter the blank state of the Turing Machine, from the following: "+tapeStates,area, new BlankTapeListener(area, frame, states, iState, tapeStates));
         }
 
     }

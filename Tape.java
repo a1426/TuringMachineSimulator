@@ -2,14 +2,16 @@ import java.util.ArrayList;
 
 public class Tape {
     //A tape is made of two
-    private ArrayList<Integer> r_tape;
-    private ArrayList<Integer> l_tape;
+    private ArrayList<Integer> r_tape=new ArrayList<>();
+    private ArrayList<Integer> l_tape=new ArrayList<>();
     private int blank;
     public Tape(int blank){
         this.blank=blank;
         r_tape.add(blank);
     }
-
+    public int length(){
+        return r_tape.size()+l_tape.size();
+    }
     public int getElement(int index){
         //The index will only vary by 1.
         if(index>=r_tape.size()){

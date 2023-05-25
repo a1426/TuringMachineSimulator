@@ -28,7 +28,8 @@ public class InitialStateListener implements ActionListener {
 
         }
         catch (NumberFormatException ex){
-
+            frame.getContentPane().removeAll();
+            frame.revalidate();
         }
 
         //Moves to the next stage, looking for the initial state
