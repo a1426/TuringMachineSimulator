@@ -6,10 +6,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class menuGUI extends JFrame{
-    public static void submit(JFrame f, String d, JTextComponent c, ActionListener l){
+    //Helper method for prompting the user to submit some data.
+    public static void submit(JFrame f, String prompt, JTextComponent c, ActionListener l){
         f.getContentPane().removeAll();
         f.getContentPane().repaint();
-        JLabel states = new JLabel(d);
+        JLabel states = new JLabel(prompt);
         JButton submit = new JButton("Click this button to submit your answer.");
         submit.addActionListener(l);
         f.add(submit, BorderLayout.SOUTH);
@@ -17,6 +18,7 @@ public class menuGUI extends JFrame{
         f.add(states, BorderLayout.NORTH);
         f.revalidate();
     }
+    //Another helper method, used for splitting
     public static ArrayList<Integer> helper(JTextComponent txt) {
         String text = txt.getText();
         String[] spl = text.split(",");
@@ -27,11 +29,11 @@ public class menuGUI extends JFrame{
                 if (!states.contains(a)) {
                     states.add(a);
                 }
-            } catch (NumberFormatException ex) {
-            }
+            } catch (NumberFormatException ex) {}
         }
         return states;
     }
+    //The menu on the upper-left hand.
     public menuGUI(){
         super("Turing Machine Simulator");
         JFrame menu = new JFrame();
@@ -46,6 +48,7 @@ public class menuGUI extends JFrame{
         mainMenu.add(preset);
         JMenuItem bb22 = new JMenuItem("Busy Beaver(2 states, 2 symbols)");
         ArrayList<Integer> bb22AL = new ArrayList<>();
+        //Creates function for the 2x2 Busy Beaver.
         bb22AL.add(0);
         bb22AL.add(1);
         HashMap<String, String> hm = new HashMap<>();
