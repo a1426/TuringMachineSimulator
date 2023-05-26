@@ -3,6 +3,7 @@ import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class menuGUI extends JFrame{
     public static void submit(JFrame f, String d, JTextComponent c, ActionListener l){
@@ -43,6 +44,27 @@ public class menuGUI extends JFrame{
         JMenu preset = new JMenu("Select a preset Turing Machine");
         preset.addActionListener(new EndListener());
         mainMenu.add(preset);
+        JMenuItem bb22 = new JMenuItem("Busy Beaver(2 states, 2 symbols)");
+        ArrayList<Integer> bb22AL = new ArrayList<>();
+        bb22AL.add(0);
+        bb22AL.add(1);
+        HashMap<String, String> hm = new HashMap<>();
+        for(int state=0; state<=1; state++){
+            for(int tape=0; tape<=1; tape++){
+                String s = "";
+                if(state==0){
+                    s+=1+",";
+                }
+                else if(tape==0) s+=0+",";
+                else s+="H,";
+                s+=1+",";
+                s += ((state + tape) % 2) == 0 ? 1 : -1;
+
+                hm.put(state+","+tape, s);
+            }
+        }
+        bb22.addActionListener(new PDTuringMachineListener(menu, bb22AL,0,0,hm));
+        preset.add(bb22);
         JMenuItem exit = new JMenuItem("Quit");
         exit.addActionListener(new EndListener());
         mainMenu.add(exit);

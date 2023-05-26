@@ -17,7 +17,7 @@ public class BlankTapeListener implements ActionListener {
         prompt+="Each line should be of the format: Input internal state, Input tape state-Output internal state, Output tape state, direction to move(L=left, R=Right, 0=Don't move)";
         prompt+="For example, 12,33-1,4,L to represent a Turing Machine that,<br>";
         prompt+="when the state is 12 and the tape reads 33, changes the state to 1 and the tape to 4, and then moves left.<br>";
-        prompt+="If you wish a state to halt, express it as : 1,2-H.";
+        prompt+="If you wish a state to halt, express it as : 1,2-H, Output, Left/Right.";
         prompt+="All possible combinations of input have been lined out already, all you need to do is to associate an output with each one";
         return prompt;
     }
@@ -33,7 +33,7 @@ public class BlankTapeListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
          //One needs to use HTML to format the label
 
-         HashMap<String, Integer[]> func = new HashMap<>();
+         HashMap<String, String> func = new HashMap<>();
 
          String textGuide = "";
          for(int state: states){

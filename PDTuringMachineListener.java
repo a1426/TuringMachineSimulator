@@ -7,7 +7,7 @@ import java.util.HashMap;
 public class PDTuringMachineListener implements ActionListener {
     private TuringMachine tm;
     private JFrame frame;
-    public PDTuringMachineListener(JFrame f, ArrayList<Integer> s, int i, int b, HashMap<String, Integer[]> fc){
+    public PDTuringMachineListener(JFrame f, ArrayList<Integer> s, int i, int b, HashMap<String, String> fc){
         tm=new TuringMachine(s,fc,b,i);
         frame=f;
     }

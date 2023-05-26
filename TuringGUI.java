@@ -1,5 +1,6 @@
 import javax.swing.*;
-import java.awt.*;
+import java.util.concurrent.atomic.AtomicInteger;
+import javax.swing.JFrame;
 
 public class TuringGUI {
     private TuringMachine tm;
@@ -9,17 +10,17 @@ public class TuringGUI {
         frame=f;
     }
 
-    private void drawTape(JFrame f){
-
-    }
     public void run(){
-
-
-        Timer gui = new Timer(500,listener->{
-            if(tm.run()){((Timer)listener.getSource()).stop();}
-            //TMGraphics tmg = new TMGraphics();
-            //frame.add(tmg);
-
+        frame.setSize(1311,300);
+        Timer gui = new Timer(1000,listener->{
+            if(tm.run()){
+                ((Timer)listener.getSource()).stop();
+            }
+            frame.getContentPane().removeAll();
+            frame.repaint();
+            TMGraphics tmg = new TMGraphics(tm);
+            frame.add(tmg);
+            frame.revalidate();
         });
         gui.setRepeats(true);
         gui.start();

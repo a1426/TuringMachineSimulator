@@ -14,8 +14,8 @@ public class TuringCodeListener implements ActionListener {
     int iState;
     ArrayList<Integer> tapeStates;
     int blank;
-    HashMap<String, Integer[]> func;
-    public TuringCodeListener(JTextComponent t, JFrame f, ArrayList<Integer> s, int i,ArrayList<Integer> ts, int b,HashMap<String, Integer[]> fc){
+    HashMap<String, String> func;
+    public TuringCodeListener(JTextComponent t, JFrame f, ArrayList<Integer> s, int i,ArrayList<Integer> ts, int b,HashMap<String, String> fc){
         txt=t;
         frame=f;
         states=s;
@@ -28,13 +28,12 @@ public class TuringCodeListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String text= txt.getText();
         String key="";
-        Integer[] arr = new Integer[3];
+        String[] arr = new String[3];
         String[] rules=text.split("\n");
         for(String s: rules){
             String[] halves=s.split("-");
             if(halves.length!=2) continue;
             if(halves[0].split(",").length!=2||(halves[1].split(",").length!=3&&halves[1].split(",").length!=1)){
-                System.out.println("1");
                 continue;
             }
             try {
@@ -44,32 +43,28 @@ public class TuringCodeListener implements ActionListener {
                     if (i == 0) key += ",";
                 }
             } catch (NumberFormatException ex) {
-                System.out.println("3");
                 continue;
             }
             if(halves[1].split(",").length==1&&halves[1].toLowerCase().contains("h")){
-                System.out.println(2);
-                arr[2]=2;
-                System.out.println(arr);
+                arr[0]="H";
             }
             else {
                 try {
                     for (int i = 0; i < 3; i++) {
                         String j = halves[1].split(",")[i];
                         if (i != 2) {
-                            arr[i] = Integer.parseInt(j);
+                            arr[i] = ""+Integer.parseInt(j);
                         } else {
                             switch (j.toLowerCase()) {
-                                case "0" -> arr[2] = 0;
-                                case "l" -> arr[2] = -1;
-                                case "r" -> arr[2] = 1;
+                                case "0" -> arr[2] = "0";
+                                case "l" -> arr[2] = "-1";
+                                case "r" -> arr[2] = "1";
                                 default -> throw new NumberFormatException();
                             }
                         }
                     }
 
                 } catch (NumberFormatException ex) {
-                    System.out.println("4");
                     continue;
                 }
             }
@@ -77,13 +72,13 @@ public class TuringCodeListener implements ActionListener {
             System.out.println(func.containsKey(key));
             System.out.println(func.get(key));
             System.out.println(key);
-            if(func.containsKey(key)&&func.get(key)==null){System.out.println("End");
-                func.put(key,arr);
+            if(func.containsKey(key)&&func.get(key)==null){
+                func.put(key,String.join(",",arr));
             }
             if(!func.containsValue(null)){
                 TuringMachine tm = new TuringMachine(states,func,blank,iState);
                 TuringGUI tg= new TuringGUI(tm,frame);
-                System.out.println("End");
+                tg.run();
                 //run turing machine
             }
             else{

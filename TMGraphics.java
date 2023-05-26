@@ -1,30 +1,32 @@
-import javax.swing.*;
 import java.awt.*;
+import java.util.Arrays;
 
 public class TMGraphics extends Canvas {
-    private final int maxLength;
-    private final int pixSize;
     private TuringMachine tm;
-    private JFrame f;
-    private Graphics g;
-    public TMGraphics(Graphics g, JFrame f, TuringMachine tm){
+    public TMGraphics(TuringMachine tm){
         this.tm=tm;
-        this.f=f;
-        this.g=g;
-        f.add(new ScrollPane(), BorderLayout.CENTER);
-        maxLength=(""+tm.maxState()).length();
-        pixSize=maxLength*8;
     }
-    public void paint(){
-        Font font = new Font(Font.MONOSPACED, Font.PLAIN, 10);
-        int w=f.getWidth();
-        int maxSquares=w/pixSize;
-        Tape tape=tm.getTape();
-        int len=tape.length();
-        //if()
+    public void paint(Graphics g) {
+        int index= tm.getIndex();
+        Tape tape = tm.getTape();
+        System.out.println(index);
+        setBackground(Color.WHITE);
+        setForeground(Color.BLACK);
+        g.drawRect(0,100,1311,100);
+        for(int i=0; i<=22; i++){
+            g.drawLine(57*i,100,57*i,200);
+        }
+        int s=10;
+        int[] xT={(1311-s)/2,1311/2,(1311+s)/2};
+        int[] yT={50,60,50};
+        g.setColor(Color.BLACK);
+        g.fillPolygon(xT,yT,3);
+        int[] c = tape.content(index);
+        for(int i=0; i<23; i++){
+            g.drawString(c[i]+"",57*i,155);
+        }
 
-
-
-
-    }
+        }
 }
+
+

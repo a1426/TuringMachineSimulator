@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
@@ -6,7 +7,7 @@ public class TuringMachine {
     //The list of all internal states.
     private List<Integer> stateList;
     //Takes in a mapping of the object state, and the tape state, seperated by a comma. The format is "[state,tape,left or right]", where left = -1, right=1.
-    private Map<String,Integer[]> function;
+    private Map<String,String> function;
     //The list of states that cause the machine to halt.
     //The tape object.
     private Tape tape;
@@ -28,7 +29,7 @@ public class TuringMachine {
         }
         return a;
     }
-    public TuringMachine(List<Integer> sl, HashMap<String,Integer[]> f, int blank, int i){
+    public TuringMachine(List<Integer> sl, HashMap<String,String> f, int blank, int i){
         stateList=sl;
         function=f;
         tape=new Tape(blank);
@@ -37,13 +38,18 @@ public class TuringMachine {
     //Returns whether it has halted.
     public boolean run(){
         //While the state isn't a halt state, it uses the map to determine the new state, written value, and direction.
-        Integer[] map=function.get(initial+","+tape.getElement(index));
-        initial=map[0];
-        tape.setElement(map[1],index);
-        //Moves index(i.e. the head of the machine), left or right depending on the function. If it is 2(a halt state), it halts.
-        if(index==2) return false;
-        index+=map[2];
-        return true;
+        String[] map=function.get(initial+","+tape.getElement(index)).split(",");
+
+        tape.setElement(index,Integer.parseInt(map[1]));
+        System.out.println("Moved"+Integer.parseInt(map[2]));
+        index+=Integer.parseInt(map[2]);
+        if(map[0].equals("H")){
+            return true;
+        }
+        else initial=Integer.parseInt(map[0]);
+        System.out.println("State:"+Integer.parseInt(map[0]));
+        return false;
+
 
     }
 }
