@@ -1,8 +1,7 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Tape {
-    //A tape is made of two
+    //A tape is made of two ArrayLists, as it must be ever-expanding in two directions.
     private ArrayList<Integer> r_tape=new ArrayList<>();
     private ArrayList<Integer> l_tape=new ArrayList<>();
     private int blank;
@@ -17,6 +16,7 @@ public class Tape {
         for(int i=0; i<12; i++){
             ans[i+11]=getElement(index+i);
         }
+        //goes back to front so as to not
         for(int i=-1; i>-12; i--){
             ans[i+11]=getElement(index+i);
         }
@@ -24,12 +24,11 @@ public class Tape {
     }
 
     public int getElement(int index){
-        //The index will only vary by 1.
+        //If one attempts to access a not defined element, enough blank elements are added such that it is defined.
         if(index>=r_tape.size()){
             for(int i= r_tape.size(); i<=index+1; i++) r_tape.add(blank);
         }
         else if(index<0&&-index+1>=l_tape.size()){
-
             for(int i= l_tape.size(); i<=-index+1; i++) l_tape.add(blank);
         }
         if(index>=0){
@@ -38,21 +37,12 @@ public class Tape {
         else return l_tape.get(-index+1);
     }
     public void setElement(int index, int val){
-        System.out.println(Arrays.toString(content(index)));
-        //Just to ensure that it exists.
-        int i=getElement(index);
+        //This call ensures that the element exists.
+        getElement(index);
         if(index>=0){
             r_tape.set(index,val);
         }
         else l_tape.set(-index+1,val);
-        System.out.println(i+" to "+ getElement(index)+val);
-        System.out.println(Arrays.toString(content(index))+"\n");
     }
-    public String toString(){
-        String s= "";
-        for(int a: l_tape){
-            s=s+a;
-        }
-        return s;
-    }
+
 }
