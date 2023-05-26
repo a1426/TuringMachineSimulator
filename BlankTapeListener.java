@@ -4,15 +4,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
-
 public class BlankTapeListener implements ActionListener {
     JTextComponent txt;
     JFrame frame;
     ArrayList<Integer> states;
     int iState;
     ArrayList<Integer> tapeStates;
-
+    //Listens for the state used on blank tapes, and prompts for the function.
+    //This function is also used in Turing Code Listener, hence why it is not just a local variable.
     public static String getPrompt(){
+        //Swing uses HTML to format things, so each <br> tag serves as a newline.
         String prompt="<html>On each line, write the rules for how the Turing machine should act.<br>";
         prompt+="Each line should be of the format: Input internal state, Input tape state-Output internal state, Output tape state, direction to move(L=left, R=Right, 0=Don't move)";
         prompt+="For example, 12,33-1,4,L to represent a Turing Machine that,<br>";
@@ -31,11 +32,10 @@ public class BlankTapeListener implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-         //One needs to use HTML to format the label
-
          HashMap<String, String> func = new HashMap<>();
 
          String textGuide = "";
+         //Defines all possible state-tape input pairs, and puts them in the text field.
          for(int state: states){
              for(int tapeState: tapeStates){
                  textGuide+=state+","+tapeState+"-\n";

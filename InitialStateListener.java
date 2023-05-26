@@ -13,27 +13,19 @@ public class InitialStateListener implements ActionListener {
         frame=f;
         states=s;
     }
+    //Listens for the initial state, and prompts for a list of tape symbols.
     @Override
     public void actionPerformed(ActionEvent e) {
         String text = txt.getText();
-        int i;
         try{
             if(text!=null) {
-                i = Integer.parseInt(text);
+                int i = Integer.parseInt(text);
                 if (states.contains(i)) {
                     JTextField area = new JTextField();
                     menuGUI.submit(frame, "Enter a list of all the integers that can be written onto the tape", area, new TapeStateListener(area, frame, states, i));
                 }
             }
-
         }
-        catch (NumberFormatException ex){
-            frame.getContentPane().removeAll();
-            frame.revalidate();
-        }
-
-        //Moves to the next stage, looking for the initial state
-
-
+        catch (NumberFormatException ex) {}
     }
 }

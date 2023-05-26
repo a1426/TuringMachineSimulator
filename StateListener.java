@@ -12,13 +12,12 @@ public class StateListener implements ActionListener{
         frame=f;
     }
     @Override
+    //Listens for the list of internal states, then sets up the phase asking for the initial state.
     public void actionPerformed(ActionEvent e) {
         ArrayList<Integer> states=menuGUI.helper(txt);
-        //Moves to the next stage, looking for the initial state
         if(states.size()>0){
             JTextField area = new JTextField();
             menuGUI.submit(frame,"Enter the initial state of the Turing Machine, from the following: "+states,area, new InitialStateListener(area, frame, states));
         }
-
     }
 }
