@@ -5,10 +5,10 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 public class BlankTapeListener implements ActionListener {
-    JTextComponent txt;
-    JFrame frame;
-    ArrayList<Integer> states;
-    int iState;
+    final JTextComponent txt;
+    final JFrame frame;
+    final ArrayList<Integer> states;
+    final int iState;
     ArrayList<Integer> tapeStates;
     //Listens for the state used on blank tapes, and prompts for the function.
     //This function is also used in Turing Code Listener, hence why it is not just a local variable.
@@ -47,7 +47,7 @@ public class BlankTapeListener implements ActionListener {
          try{
             if(text!=null) {
                 i = Integer.parseInt(text);
-                if (states.contains(i)) {
+                if (tapeStates.contains(i)) {
                     JTextArea area = new JTextArea(textGuide);
                     menuGUI.submit(frame, getPrompt(), area, new TuringCodeListener(area, frame, states, iState, tapeStates, i, func));
                 }

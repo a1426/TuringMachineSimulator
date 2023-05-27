@@ -25,14 +25,14 @@ public class TuringCodeListener implements ActionListener {
     //Checks for the function.
     @Override
     public void actionPerformed(ActionEvent e) {
-        String key="";
-        String[] arr = new String[3];
         String[] rules=txt.getText().split("\n");
         //Checks to make sure the user's input is formatted correctly.
         for(String s: rules){
+            String key="";
+            String[] arr = new String[3];
             String[] halves=s.split("-");
             if(halves.length!=2) continue;
-            if(halves[0].split(",").length!=2||(halves[1].split(",").length!=3&&halves[1].split(",").length!=1)){
+            if(halves[0].split(",").length!=2||(halves[1].split(",").length!=3)){
                 continue;
             }
             try {
@@ -44,35 +44,43 @@ public class TuringCodeListener implements ActionListener {
             } catch (NumberFormatException ex) {
                 continue;
             }
-            if(halves[1].split(",").length==1&&halves[1].toLowerCase().contains("h")){
+            if(halves[1].toLowerCase().contains("h")){
                 arr[0]="H";
             }
-            else {
-                try {
-                    for (int i = 0; i < 3; i++) {
-                        String j = halves[1].split(",")[i];
-                        if (i != 2) {
-                            arr[i] = ""+Integer.parseInt(j);
-                        } else {
-                            switch (j.toLowerCase()) {
-                                case "0" -> arr[2] = "0";
-                                case "l" -> arr[2] = "-1";
-                                case "r" -> arr[2] = "1";
-                                default -> throw new NumberFormatException();
-                            }
+            else{
+                try{
+                    arr[0]=""+Integer.parseInt(halves[1].split(",")[0]);
+                }
+                catch (NumberFormatException exe) {continue;}
+            }
+            try {
+                for (int i = 1; i < 3; i++) {
+                    String j = halves[1].split(",")[i];
+                    if (i == 1) {
+                        arr[i] = ""+Integer.parseInt(j);
+                    } else {
+                        switch (j.toLowerCase()) {
+                            case "0" -> arr[2] = "0";
+                            case "l" -> arr[2] = "-1";
+                            case "r" -> arr[2] = "1";
+                            default -> throw new NumberFormatException();
                         }
                     }
-
-                } catch (NumberFormatException ex) {
-                    continue;
                 }
+
+            } catch (NumberFormatException ex) {
+                continue;
             }
+
+            System.out.println(s+key);
             //Saves the input and prevents rewriting.
             if(func.containsKey(key)&&func.get(key)==null){
                 func.put(key,String.join(",",arr));
             }
+
             if(!func.containsValue(null)){
                 //Starts the GUI
+                System.out.println(func);
                 TuringMachine tm = new TuringMachine(states,func,blank,iState);
                 TuringGUI tg= new TuringGUI(tm,frame);
                 tg.run();

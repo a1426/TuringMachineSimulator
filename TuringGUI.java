@@ -17,8 +17,9 @@ public class TuringGUI {
             count++;
             if(tm.run()){
                 ((Timer)listener.getSource()).stop();
+                //Note well, this leads to some weird issues when running the same simulation twice.
                 JOptionPane.showMessageDialog(frame, "The Turing Machine has halted after "+count+" iterations.",
-                        "Halted!", JOptionPane.INFORMATION_MESSAGE);
+                        "Halted!", JOptionPane.CANCEL_OPTION);
 
             }
             frame.getContentPane().removeAll();
@@ -29,6 +30,5 @@ public class TuringGUI {
         });
         gui.setRepeats(true);
         gui.start();
-
     }
 }

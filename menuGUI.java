@@ -46,9 +46,10 @@ public class menuGUI extends JFrame{
         JMenu preset = new JMenu("Select a preset Turing Machine");
         preset.addActionListener(new EndListener());
         mainMenu.add(preset);
+        //I would add more busy-beavers, but time constraints are annyoing,
         JMenuItem bb22 = new JMenuItem("Busy Beaver(2 states, 2 symbols)");
         ArrayList<Integer> bb22AL = new ArrayList<>();
-        //Creates function for the 2x2 Busy Beaver.
+        //Creates the function for the 2x2 Busy Beaver.
         bb22AL.add(0);
         bb22AL.add(1);
         HashMap<String, String> hm = new HashMap<>();
