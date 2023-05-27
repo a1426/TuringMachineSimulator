@@ -71,8 +71,6 @@ public class TuringCodeListener implements ActionListener {
             } catch (NumberFormatException ex) {
                 continue;
             }
-
-            System.out.println(s+key);
             //Saves the input and prevents rewriting.
             if(func.containsKey(key)&&func.get(key)==null){
                 func.put(key,String.join(",",arr));
@@ -80,11 +78,9 @@ public class TuringCodeListener implements ActionListener {
 
             if(!func.containsValue(null)){
                 //Starts the GUI
-                System.out.println(func);
                 TuringMachine tm = new TuringMachine(states,func,blank,iState);
                 TuringGUI tg= new TuringGUI(tm,frame);
                 tg.run();
-
             }
             else{
                 //If there are unresolved mappings, display those in the text field
