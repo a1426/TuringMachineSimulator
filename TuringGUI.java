@@ -4,22 +4,21 @@ import javax.swing.JFrame;
 public class TuringGUI {
     private TuringMachine tm;
     private JFrame frame;
-    //Cannot be local, to be able to be changed inside the lambda.
+    //The variable cannot be local, so that it may be changed inside the lambda.
     private int count=0;
     public TuringGUI(TuringMachine tm, JFrame f){
         this.tm=tm;
         frame=f;
     }
     public void run(){
-        JOptionPane finish = new JOptionPane();
         frame.setSize(1311,300);
         //Credit to StackOverflow for helping me find the Timer class as a way to handle delays without threading issues.
-        Timer gui = new Timer(2000,listener->{
+        Timer gui = new Timer(1500,listener->{
+            count++;
             if(tm.run()){
-                count++;
                 ((Timer)listener.getSource()).stop();
-                JOptionPane.showInternalMessageDialog(frame, "information",
-                        "information", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(frame, "The Turing Machine has halted after "+count+" iterations.",
+                        "Halted!", JOptionPane.INFORMATION_MESSAGE);
 
             }
             frame.getContentPane().removeAll();

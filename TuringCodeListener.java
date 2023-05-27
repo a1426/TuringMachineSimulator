@@ -3,8 +3,6 @@ import javax.swing.text.JTextComponent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.DoubleSummaryStatistics;
 import java.util.HashMap;
 
 public class TuringCodeListener implements ActionListener {
@@ -24,12 +22,13 @@ public class TuringCodeListener implements ActionListener {
         blank=b;
         func=fc;
     }
+    //Checks for the function.
     @Override
     public void actionPerformed(ActionEvent e) {
-        String text= txt.getText();
         String key="";
         String[] arr = new String[3];
-        String[] rules=text.split("\n");
+        String[] rules=txt.getText().split("\n");
+        //Checks to make sure the user's input is formatted correctly.
         for(String s: rules){
             String[] halves=s.split("-");
             if(halves.length!=2) continue;
@@ -68,20 +67,19 @@ public class TuringCodeListener implements ActionListener {
                     continue;
                 }
             }
-            //prevents rewriting
-            System.out.println(func.containsKey(key));
-            System.out.println(func.get(key));
-            System.out.println(key);
+            //Saves the input and prevents rewriting.
             if(func.containsKey(key)&&func.get(key)==null){
                 func.put(key,String.join(",",arr));
             }
             if(!func.containsValue(null)){
+                //Starts the GUI
                 TuringMachine tm = new TuringMachine(states,func,blank,iState);
                 TuringGUI tg= new TuringGUI(tm,frame);
                 tg.run();
-                //run turing machine
+
             }
             else{
+                //If there are unresolved mappings, display those in the text field
                 String textGuide="";
                 for(int state: states){
                     for(int tapeState: tapeStates){
